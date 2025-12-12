@@ -141,5 +141,3 @@ jobs:
       - name: Déploiement final
         run: |
           echo "Déploiement de la solution"
-name Automatisation des tests.txt
-4 Ko
