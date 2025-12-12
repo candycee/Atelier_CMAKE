@@ -6,12 +6,12 @@ jobs:
   Compilation:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build & CTest
+      - name: Compilation
         run: |
-          mkdir -p build
+          last_directory=$(basename ${{ runner.workspace }})
+          git clone https://github.com/${{ github.repository }}.git
+          cd ./$last_directory
+          mkdir build
           cd build
           cmake ..
           make
@@ -21,77 +21,61 @@ jobs:
     runs-on: ubuntu-latest
     needs: Compilation
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build
+      - name: Test add
         run: |
-          mkdir -p build
+          last_directory=$(basename ${{ runner.workspace }})
+          git clone https://github.com/${{ github.repository }}.git
+          cd ./$last_directory
+          mkdir build
           cd build
           cmake ..
           make
-
-      - name: Test add
-        run: |
-          cd build
-          ./calculator add 10 5
+          ./src/calculator add 10 5
 
   Test_Sub:
     runs-on: ubuntu-latest
     needs: Compilation
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build
+      - name: Test sub
         run: |
-          mkdir -p build
+          last_directory=$(basename ${{ runner.workspace }})
+          git clone https://github.com/${{ github.repository }}.git
+          cd ./$last_directory
+          mkdir build
           cd build
           cmake ..
           make
-
-      - name: Test sub
-        run: |
-          cd build
-          ./calculator sub 10 5
+          ./src/calculator sub 10 5
 
   Test_Mul:
     runs-on: ubuntu-latest
     needs: Compilation
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build
+      - name: Test mul
         run: |
-          mkdir -p build
+          last_directory=$(basename ${{ runner.workspace }})
+          git clone https://github.com/${{ github.repository }}.git
+          cd ./$last_directory
+          mkdir build
           cd build
           cmake ..
           make
-
-      - name: Test mul
-        run: |
-          cd build
-          ./calculator mul 5 5
+          ./src/calculator mul 5 5
 
   Test_Div:
     runs-on: ubuntu-latest
     needs: Compilation
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build
+      - name: Test div
         run: |
-          mkdir -p build
+          last_directory=$(basename ${{ runner.workspace }})
+          git clone https://github.com/${{ github.repository }}.git
+          cd ./$last_directory
+          mkdir build
           cd build
           cmake ..
           make
-
-      - name: Test div
-        run: |
-          cd build
-          ./calculator div 10 5
+          ./src/calculator div 10 5
 
   Test_Car:
     runs-on: ubuntu-latest
