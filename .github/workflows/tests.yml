@@ -96,8 +96,7 @@ jobs:
           cd build
           set -e
           echo "== Test car 5 ==" > report.txt
-          result=$(./calculator car 5)
-          echo "$result" | tee -a report.txt
+          ./calculator car 5 | tee -a report.txt
           echo "Exit code: $?" >> report.txt
 
       - name: Upload report as artifact
